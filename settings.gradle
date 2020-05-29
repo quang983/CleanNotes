@@ -1,0 +1,5 @@
+rootProject.name='CleanNotes'
+include ':app'
+include ':domain'
+include ':local'
+include ':data'
