@@ -9,5 +9,18 @@
         android:id="@+id/noteListFragment"
         android:name="com.example.cleannotes.ui.main.NoteListFragment"
         android:label="Notes"
-        tools:layout="@layout/note_list_fragment" />
+        tools:layout="@layout/note_list_fragment" >
+        <action
+            android:id="@+id/toCreateNoteScreen"
+            app:destination="@id/createNewNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createNewNoteFragment"
+        android:name="com.example.cleannotes.ui.newnote.CreateNewNoteFragment"
+        android:label="New note"
+        tools:layout="@layout/create_new_note_fragment" >
+        <action
+            android:id="@+id/toNoteListScreen"
+            app:destination="@id/noteListFragment" />
+    </fragment>
 </navigation>

@@ -7,6 +7,9 @@ class CreateNoteUseCase(
     private val repository: NoteRepository
 ) {
 
-    suspend fun execute(note: Note) = repository.createNewNote(note = note)
+    suspend fun execute(title: String, description: String) {
+        val note = Note(title = title, description = description)
+        repository.createNewNote(note = note)
+    }
 
 }

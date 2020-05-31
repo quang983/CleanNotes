@@ -17,7 +17,7 @@ class LocalNoteSourceImpl(
             }
     }
 
-    override suspend fun obtainById(id: Int): NoteModel {
+    override suspend fun obtainById(id: Long): NoteModel {
         val note = localDao.getLocalNoteById(id = id)
         return mapper.toModel(local = note)
     }

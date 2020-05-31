@@ -10,12 +10,12 @@ interface LocalNoteDao {
     suspend fun getAllLocalNotes(): List<LocalNote>
 
     @Query("SELECT * FROM LocalNote WHERE id LIKE :id")
-    suspend fun getLocalNoteById(id: Int): LocalNote
+    suspend fun getLocalNoteById(id: Long): LocalNote
 
     @Insert
     suspend fun addNewLocalNote(note: LocalNote)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateLocalNote(note: LocalNote)
 
     @Delete

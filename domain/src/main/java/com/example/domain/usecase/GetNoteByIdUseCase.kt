@@ -6,6 +6,6 @@ class GetNoteByIdUseCase(
     private val repository: NoteRepository
 ) {
 
-    suspend fun execute(id: Int) = repository.getNoteById(id = id)
+    suspend fun execute(id: Long) = repository.getNoteById(id = id)
 
 }

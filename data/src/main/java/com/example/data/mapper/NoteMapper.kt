@@ -8,6 +8,7 @@ class NoteMapper: BaseMapper<NoteModel, Note> {
 
     override fun toModel(entity: Note): NoteModel {
         return NoteModel(
+            id = entity.id,
             title = entity.title,
             description = entity.description
         )
@@ -15,6 +16,7 @@ class NoteMapper: BaseMapper<NoteModel, Note> {
 
     override fun toEntity(model: NoteModel): Note {
         return Note(
+            id = model.id,
             title = model.title,
             description = model.description
         )

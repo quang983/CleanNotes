@@ -17,7 +17,7 @@ class AppNoteRepository(
             }
     }
 
-    override suspend fun getNoteById(id: Int): Note {
+    override suspend fun getNoteById(id: Long): Note {
         val model = localDataSource.obtainById(id = id)
         return mapper.toEntity(model = model)
     }

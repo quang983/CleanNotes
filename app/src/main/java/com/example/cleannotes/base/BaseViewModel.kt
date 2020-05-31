@@ -9,6 +9,8 @@ import com.example.cleannotes.event.Event
 abstract class BaseViewModel: ViewModel() {
 
     protected val _state: MutableLiveData<State> = MutableLiveData()
+    val state: LiveData<State>
+        get() = _state
 
     abstract fun obtainEvent(event: Event)
 
