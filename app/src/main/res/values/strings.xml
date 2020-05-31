@@ -2,4 +2,6 @@
     <string name="app_name">Clean notes</string>
     <string name="new_note_title">Your note title</string>
     <string name="new_note_description">Type your note description</string>
+    <string name="note_menu_delete">Delete</string>
+    <string name="note_menu_update">Update</string>
 </resources>

@@ -5,10 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleannotes.R
+import com.example.cleannotes.ui.OnNoteClick
 import com.example.domain.model.Note
 import kotlinx.android.synthetic.main.note_card.view.*
 
-class NoteListAdapter: RecyclerView.Adapter<NoteViewHolder>() {
+class NoteListAdapter(
+    private val onNoteClickListener: OnNoteClick
+): RecyclerView.Adapter<NoteViewHolder>() {
 
     private val notes: MutableList<Note> = mutableListOf()
 
@@ -23,7 +26,7 @@ class NoteListAdapter: RecyclerView.Adapter<NoteViewHolder>() {
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val note = notes[position]
-        holder.bind(note = note)
+        holder.bind(note = note, listener = onNoteClickListener)
     }
 
     fun updateNoteList(newNotes: List<Note>) {
@@ -36,8 +39,11 @@ class NoteListAdapter: RecyclerView.Adapter<NoteViewHolder>() {
 
 class NoteViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
 
-    fun bind(note: Note) {
+    fun bind(note: Note, listener: OnNoteClick) {
         view.noteCardTitle.text = note.title
+        view.setOnClickListener {
+            listener.onClick(noteId = note.id!!)
+        }
     }
 
 }

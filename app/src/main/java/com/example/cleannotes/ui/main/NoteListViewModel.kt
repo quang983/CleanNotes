@@ -1,6 +1,5 @@
 package com.example.cleannotes.ui.main
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.cleannotes.base.BaseViewModel
 import com.example.cleannotes.event.Event
@@ -14,8 +13,6 @@ import kotlinx.coroutines.withContext
 class NoteListViewModel(
     private val getAllUseCase: GetAllNotesUseCase
 ) : BaseViewModel() {
-
-    private val TAG = NoteListViewModel::class.java.canonicalName
 
     override fun obtainEvent(event: Event) {
         when(event) {
@@ -33,9 +30,6 @@ class NoteListViewModel(
                 if (notes.isEmpty()) {
                     _state.value = OnEmptyDataState
                 } else {
-                    notes.forEach {
-                        Log.i(TAG, it.id.toString())
-                    }
                     _state.value = OnSuccessState(data = notes)
                 }
             } catch (e: Exception) {

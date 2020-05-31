@@ -13,6 +13,9 @@
         <action
             android:id="@+id/toCreateNoteScreen"
             app:destination="@id/createNewNoteFragment" />
+        <action
+            android:id="@+id/toNote"
+            app:destination="@id/noteFragment" />
     </fragment>
     <fragment
         android:id="@+id/createNewNoteFragment"
@@ -22,5 +25,18 @@
         <action
             android:id="@+id/toNoteListScreen"
             app:destination="@id/noteListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.example.cleannotes.ui.note.NoteFragment"
+        android:label="Note"
+        tools:layout="@layout/note_fragment" >
+        <action
+            android:id="@+id/toNoteListScreen"
+            app:destination="@id/noteListFragment" />
+        <argument
+            android:name="noteId"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
 </navigation>
