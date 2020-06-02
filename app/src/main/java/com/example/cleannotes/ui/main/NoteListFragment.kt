@@ -1,13 +1,12 @@
 package com.example.cleannotes.ui.main
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.cleannotes.R
+import com.example.cleannotes.base.BaseFragment
 import com.example.cleannotes.event.LoadAllNotes
 import com.example.cleannotes.ui.OnNoteClick
 import com.example.cleannotes.ui.main.adapter.NoteListAdapter
@@ -19,7 +18,7 @@ import com.example.domain.state.OnSuccessState
 import kotlinx.android.synthetic.main.note_list_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NoteListFragment : Fragment(R.layout.note_list_fragment), OnNoteClick {
+class NoteListFragment : BaseFragment(R.layout.note_list_fragment), OnNoteClick {
 
     private val viewModel: NoteListViewModel by viewModel()
     private lateinit var recyclerAdapter: NoteListAdapter
@@ -30,24 +29,9 @@ class NoteListFragment : Fragment(R.layout.note_list_fragment), OnNoteClick {
         setupRecycler()
         setupButton()
         viewModel.obtainEvent(event = LoadAllNotes)
-        observeState()
     }
 
-    override fun onClick(noteId: Long) {
-        Navigation.findNavController(btnCreateNewNote).navigate(
-            NoteListFragmentDirections.toNote().setNoteId(noteId)
-        )
-    }
-
-    private fun setupButton() {
-        btnCreateNewNote.setOnClickListener {
-            Navigation.findNavController(it).navigate(
-                NoteListFragmentDirections.toCreateNoteScreen()
-            )
-        }
-    }
-
-    private fun observeState() {
+    override fun observeState() {
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 OnLoadingState -> onLoadingState()
@@ -58,20 +42,34 @@ class NoteListFragment : Fragment(R.layout.note_list_fragment), OnNoteClick {
         })
     }
 
+    override fun onClick(noteId: Long) {
+        Navigation.findNavController(btnCreateNewNote).navigate(
+            NoteListFragmentDirections.toNote().setNoteId(noteId)
+        )
+    }
+
     private fun onSuccessState(data: List<Note>) {
         recyclerAdapter.updateNoteList(newNotes = data)
     }
 
     private fun onErrorState(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        displayMessage(message = message)
     }
 
     private fun onEmptyState() {
-        Toast.makeText(context, "Empty list", Toast.LENGTH_SHORT).show()
+        displayMessage(message = "Empty list")
     }
 
     private fun onLoadingState() {
-        Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
+        displayMessage(message = "Loading")
+    }
+
+    private fun setupButton() {
+        btnCreateNewNote.setOnClickListener {
+            Navigation.findNavController(it).navigate(
+                NoteListFragmentDirections.toCreateNoteScreen()
+            )
+        }
     }
 
     private fun setupRecycler() {

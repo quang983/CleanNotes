@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.cleannotes.R
+import com.example.cleannotes.base.BaseFragment
 import com.example.cleannotes.event.DeleteNote
 import com.example.cleannotes.event.GetNoteById
 import com.example.domain.model.Note
@@ -16,7 +17,7 @@ import com.example.domain.state.*
 import kotlinx.android.synthetic.main.note_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NoteFragment : Fragment(R.layout.note_fragment) {
+class NoteFragment : BaseFragment(R.layout.note_fragment) {
 
     private val viewModel: NoteViewModel by viewModel()
     private var note: Note? = null
@@ -28,7 +29,6 @@ class NoteFragment : Fragment(R.layout.note_fragment) {
             val noteId = NoteFragmentArgs.fromBundle(it).noteId
             viewModel.obtainEvent(event = GetNoteById(id = noteId))
         }
-        observeState()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -44,9 +44,7 @@ class NoteFragment : Fragment(R.layout.note_fragment) {
                         NoteFragmentDirections.toUpdateNoteScreen().setNoteId(it)
                     )
                 }
-
             }
-
             R.id.delete_note -> {
                 note?.let {
                     viewModel.obtainEvent(event = DeleteNote(note = it))
@@ -56,7 +54,7 @@ class NoteFragment : Fragment(R.layout.note_fragment) {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun observeState() {
+    override fun observeState() {
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 OnLoadingState -> onLoadingState()
@@ -77,22 +75,17 @@ class NoteFragment : Fragment(R.layout.note_fragment) {
     }
 
     private fun onErrorState(message: String) {
-        showMessage(message = message)
+        displayMessage(message = message)
     }
 
     private fun onSuccessActionState() {
-        showMessage(message = "Success!")
+        displayMessage(message = "Success!")
         Navigation.findNavController(noteTitle).navigate(
             NoteFragmentDirections.toNoteListScreen()
         )
     }
 
     private fun onLoadingState() {
-        showMessage(message = "Loading")
+        displayMessage(message = "Loading")
     }
-
-    private fun showMessage(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
 }

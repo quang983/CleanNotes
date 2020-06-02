@@ -2,11 +2,10 @@ package com.example.cleannotes.ui.update
 
 import android.os.Bundle
 import android.widget.TextView
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.cleannotes.R
+import com.example.cleannotes.base.BaseFragment
 import com.example.cleannotes.event.GetNoteById
 import com.example.cleannotes.event.UpdateNote
 import com.example.cleannotes.ui.note.NoteViewModel
@@ -15,7 +14,7 @@ import com.example.domain.state.*
 import kotlinx.android.synthetic.main.update_note_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class UpdateNoteFragment : Fragment(R.layout.update_note_fragment) {
+class UpdateNoteFragment : BaseFragment(R.layout.update_note_fragment) {
 
     private val viewModel: NoteViewModel by viewModel()
     private var noteId: Long = 0
@@ -26,10 +25,9 @@ class UpdateNoteFragment : Fragment(R.layout.update_note_fragment) {
             noteId = UpdateNoteFragmentArgs.fromBundle(it).noteId
             viewModel.obtainEvent(event = GetNoteById(id = noteId))
         }
-        observeState()
     }
 
-    private fun observeState() {
+    override fun observeState() {
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 OnSuccessActionState -> onSuccessAction()
@@ -49,14 +47,9 @@ class UpdateNoteFragment : Fragment(R.layout.update_note_fragment) {
             val newTitle = updatedNoteTitle.text.toString()
             val newDescription = updatedNoteDescription.text.toString()
             if (newTitle.isNotEmpty() && newDescription.isNotEmpty()) {
+                val note = Note(id = noteId, title = newTitle, description = newDescription)
                 viewModel.obtainEvent(
-                    event = UpdateNote(
-                        note = Note(
-                            id = noteId,
-                            title = newTitle,
-                            description = newDescription
-                        )
-                    )
+                    event = UpdateNote(note = note)
                 )
             }
         }
@@ -72,9 +65,5 @@ class UpdateNoteFragment : Fragment(R.layout.update_note_fragment) {
         Navigation.findNavController(btnUpdateNote).navigate(
             UpdateNoteFragmentDirections.backToNoteScreen().setNoteId(noteId)
         )
-    }
-
-    private fun displayMessage(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
