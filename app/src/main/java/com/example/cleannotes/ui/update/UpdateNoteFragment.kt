@@ -8,15 +8,12 @@ import com.example.cleannotes.R
 import com.example.cleannotes.base.BaseFragment
 import com.example.cleannotes.event.GetNoteById
 import com.example.cleannotes.event.UpdateNote
-import com.example.cleannotes.ui.note.NoteViewModel
 import com.example.domain.model.Note
 import com.example.domain.state.*
 import kotlinx.android.synthetic.main.update_note_fragment.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UpdateNoteFragment : BaseFragment(R.layout.update_note_fragment) {
 
-    private val viewModel: NoteViewModel by viewModel()
     private var noteId: Long = 0
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

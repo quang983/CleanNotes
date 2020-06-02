@@ -9,11 +9,8 @@ import com.example.cleannotes.event.CreateNewNote
 import com.example.domain.state.OnErrorState
 import com.example.domain.state.OnSuccessActionState
 import kotlinx.android.synthetic.main.create_new_note_fragment.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateNewNoteFragment : BaseFragment(R.layout.create_new_note_fragment) {
-
-    private val viewModel: CreateNewNoteViewModel by viewModel()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

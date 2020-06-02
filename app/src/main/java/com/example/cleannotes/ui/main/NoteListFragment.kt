@@ -16,11 +16,9 @@ import com.example.domain.state.OnErrorState
 import com.example.domain.state.OnLoadingState
 import com.example.domain.state.OnSuccessState
 import kotlinx.android.synthetic.main.note_list_fragment.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NoteListFragment : BaseFragment(R.layout.note_list_fragment), OnNoteClick {
 
-    private val viewModel: NoteListViewModel by viewModel()
     private lateinit var recyclerAdapter: NoteListAdapter
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
