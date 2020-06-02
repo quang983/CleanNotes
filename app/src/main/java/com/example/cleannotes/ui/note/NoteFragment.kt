@@ -39,8 +39,14 @@ class NoteFragment : Fragment(R.layout.note_fragment) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.update_note -> {
+                note?.id?.let {
+                    Navigation.findNavController(noteTitle).navigate(
+                        NoteFragmentDirections.toUpdateNoteScreen().setNoteId(it)
+                    )
+                }
 
             }
+
             R.id.delete_note -> {
                 note?.let {
                     viewModel.obtainEvent(event = DeleteNote(note = it))

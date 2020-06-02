@@ -38,5 +38,21 @@
             android:name="noteId"
             app:argType="long"
             android:defaultValue="0L" />
+        <action
+            android:id="@+id/toUpdateNoteScreen"
+            app:destination="@id/updateNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateNoteFragment"
+        android:name="com.example.cleannotes.ui.update.UpdateNoteFragment"
+        android:label="Update note"
+        tools:layout="@layout/update_note_fragment" >
+        <action
+            android:id="@+id/backToNoteScreen"
+            app:destination="@id/noteFragment" />
+        <argument
+            android:name="noteId"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
 </navigation>
