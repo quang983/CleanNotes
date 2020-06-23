@@ -6,11 +6,15 @@ import androidx.navigation.Navigation
 import com.example.cleannotes.R
 import com.example.cleannotes.base.BaseFragment
 import com.example.cleannotes.event.CreateNewNote
+import com.example.cleannotes.util.NoteValidator
 import com.example.domain.state.OnErrorState
 import com.example.domain.state.OnSuccessActionState
 import kotlinx.android.synthetic.main.create_new_note_fragment.*
+import org.koin.android.ext.android.inject
 
 class CreateNewNoteFragment : BaseFragment(R.layout.create_new_note_fragment) {
+
+    private val validator: NoteValidator by inject()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -41,13 +45,16 @@ class CreateNewNoteFragment : BaseFragment(R.layout.create_new_note_fragment) {
         btnAddNewNote.setOnClickListener {
             val title = newNoteTitle.text.toString()
             val description = newNoteDescription.text.toString()
-            if (title.isNotEmpty() && description.isNotEmpty()) {
-                viewModel.obtainEvent(event = CreateNewNote(
-                    title = title, description = description
-                ))
-            } else {
-                displayMessage(message = "All fields must be fill")
-            }
+            createNewNote(title = title, description = description)
+        }
+    }
+
+    private fun createNewNote(title: String, description: String) {
+        if (validator.validate(title, description)) {
+            val event = CreateNewNote(title = title, description = description)
+            viewModel.obtainEvent(event = event)
+        } else {
+            displayMessage(message = "All fields must be fill!")
         }
     }
 }

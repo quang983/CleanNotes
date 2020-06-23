@@ -1,6 +1,7 @@
 package com.example.cleannotes
 
 import android.app.Application
+import com.example.cleannotes.di.utilModule
 import com.example.data.di.mapperModule
 import com.example.data.di.repositoryModule
 import com.example.domain.di.useCaseModule
@@ -24,7 +25,8 @@ class AppComponent: Application() {
                 databaseModule,
                 mapperModule,
                 repositoryModule,
-                viewModelModule
+                viewModelModule,
+                utilModule
             )
         }
     }

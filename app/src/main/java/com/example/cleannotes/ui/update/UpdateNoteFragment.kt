@@ -8,13 +8,16 @@ import com.example.cleannotes.R
 import com.example.cleannotes.base.BaseFragment
 import com.example.cleannotes.event.GetNoteById
 import com.example.cleannotes.event.UpdateNote
+import com.example.cleannotes.util.NoteValidator
 import com.example.domain.model.Note
 import com.example.domain.state.*
 import kotlinx.android.synthetic.main.update_note_fragment.*
+import org.koin.android.ext.android.inject
 
 class UpdateNoteFragment : BaseFragment(R.layout.update_note_fragment) {
 
     private var noteId: Long = 0
+    private val validator: NoteValidator by inject()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -43,12 +46,16 @@ class UpdateNoteFragment : BaseFragment(R.layout.update_note_fragment) {
         btnUpdateNote.setOnClickListener {
             val newTitle = updatedNoteTitle.text.toString()
             val newDescription = updatedNoteDescription.text.toString()
-            if (newTitle.isNotEmpty() && newDescription.isNotEmpty()) {
-                val note = Note(id = noteId, title = newTitle, description = newDescription)
-                viewModel.obtainEvent(
-                    event = UpdateNote(note = note)
-                )
-            }
+            updateNote(title = newTitle, description = newDescription)
+        }
+    }
+
+    private fun updateNote(title: String, description: String) {
+        if (validator.validate(title, description)) {
+            val note = Note(id = noteId, title = title, description = description)
+            viewModel.obtainEvent(event = UpdateNote(note = note))
+        } else {
+            displayMessage(message = "All fields must be fill!")
         }
     }
 

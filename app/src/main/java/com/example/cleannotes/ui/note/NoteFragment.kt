@@ -10,6 +10,7 @@ import com.example.cleannotes.R
 import com.example.cleannotes.base.BaseFragment
 import com.example.cleannotes.event.DeleteNote
 import com.example.cleannotes.event.GetNoteById
+import com.example.cleannotes.util.buildDialog
 import com.example.domain.model.Note
 import com.example.domain.state.*
 import kotlinx.android.synthetic.main.note_fragment.*
@@ -35,15 +36,13 @@ class NoteFragment : BaseFragment(R.layout.note_fragment) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.update_note -> {
-                note?.id?.let {
-                    Navigation.findNavController(noteTitle).navigate(
-                        NoteFragmentDirections.toUpdateNoteScreen().setNoteId(it)
-                    )
+                note?.id?.let { id ->
+                    updateNote(id = id)
                 }
             }
             R.id.delete_note -> {
                 note?.let {
-                    viewModel.obtainEvent(event = DeleteNote(note = it))
+                    deleteNote(note = it)
                 }
             }
         }
@@ -83,5 +82,21 @@ class NoteFragment : BaseFragment(R.layout.note_fragment) {
 
     private fun onLoadingState() {
         displayMessage(message = "Loading")
+    }
+
+    private fun updateNote(id: Long) {
+        Navigation.findNavController(noteTitle).navigate(
+            NoteFragmentDirections.toUpdateNoteScreen().setNoteId(id)
+        )
+    }
+
+    private fun deleteNote(note: Note) {
+        val dialog = buildDialog(
+            requireContext(),
+            "Delete note",
+            viewModel::obtainEvent,
+            event = DeleteNote(note = note)
+        )
+        dialog.show()
     }
 }

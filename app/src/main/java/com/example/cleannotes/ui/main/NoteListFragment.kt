@@ -1,6 +1,7 @@
 package com.example.cleannotes.ui.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,6 +48,8 @@ class NoteListFragment : BaseFragment(R.layout.note_list_fragment), OnNoteClick 
     }
 
     private fun onSuccessState(data: List<Note>) {
+        noteList.visibility = View.VISIBLE
+        noteListLoadingBar.visibility = View.GONE
         recyclerAdapter.updateNoteList(newNotes = data)
     }
 
@@ -55,11 +58,14 @@ class NoteListFragment : BaseFragment(R.layout.note_list_fragment), OnNoteClick 
     }
 
     private fun onEmptyState() {
+        noteList.visibility = View.VISIBLE
+        noteListLoadingBar.visibility = View.GONE
         displayMessage(message = "Empty list")
     }
 
     private fun onLoadingState() {
-        displayMessage(message = "Loading")
+        noteList.visibility = View.GONE
+        noteListLoadingBar.visibility = View.VISIBLE
     }
 
     private fun setupButton() {
