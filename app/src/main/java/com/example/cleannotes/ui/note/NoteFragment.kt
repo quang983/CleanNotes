@@ -54,8 +54,8 @@ class NoteFragment : BaseFragment(R.layout.note_fragment) {
             when (state) {
                 OnLoadingState -> onLoadingState()
                 OnSuccessActionState -> onSuccessActionState()
-                is OnSuccessState<*> -> {
-                    val localNote = state.data as Note
+                is OnSuccessLoadNoteState -> {
+                    val localNote = state.note
                     note = localNote
                     onSuccessState(data = localNote)
                 }
@@ -70,18 +70,18 @@ class NoteFragment : BaseFragment(R.layout.note_fragment) {
     }
 
     private fun onErrorState(message: String) {
-        displayMessage(message = message)
+        displayMessage(view = noteTitle, message = message)
     }
 
     private fun onSuccessActionState() {
-        displayMessage(message = "Success!")
+        displayMessage(view = noteTitle, message = "Success!")
         Navigation.findNavController(noteTitle).navigate(
             NoteFragmentDirections.toNoteListScreen()
         )
     }
 
     private fun onLoadingState() {
-        displayMessage(message = "Loading")
+        displayMessage(view = noteTitle, message = "Loading")
     }
 
     private fun updateNote(id: Long) {

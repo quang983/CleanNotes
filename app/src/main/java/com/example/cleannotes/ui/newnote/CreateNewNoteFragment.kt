@@ -32,7 +32,7 @@ class CreateNewNoteFragment : BaseFragment(R.layout.create_new_note_fragment) {
     }
 
     private fun onErrorState(message: String) {
-        displayMessage(message = message)
+        displayMessage(view = newNoteTitle, message = message)
     }
 
     private fun onSuccessState() {
@@ -54,7 +54,7 @@ class CreateNewNoteFragment : BaseFragment(R.layout.create_new_note_fragment) {
             val event = CreateNewNote(title = title, description = description)
             viewModel.obtainEvent(event = event)
         } else {
-            displayMessage(message = "All fields must be fill!")
+            displayMessage(view = newNoteTitle, message = "All fields must be fill!")
         }
     }
 }

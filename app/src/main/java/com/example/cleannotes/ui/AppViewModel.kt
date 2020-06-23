@@ -80,7 +80,7 @@ class AppViewModel(
                 val note = withContext(Dispatchers.IO) {
                     getNoteByIdUseCase.execute(id = id)
                 }
-                _state.value = OnSuccessState(data = note)
+                _state.value = OnSuccessLoadNoteState(note = note)
             } catch (e: Exception) {
                 e.printStackTrace()
                 _state.value = OnErrorState(message = "Error while loading note!")
@@ -98,7 +98,7 @@ class AppViewModel(
                 if (notes.isEmpty()) {
                     _state.value = OnEmptyDataState
                 } else {
-                    _state.value = OnSuccessState(data = notes)
+                    _state.value = OnSuccessLoadListState(data = notes)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

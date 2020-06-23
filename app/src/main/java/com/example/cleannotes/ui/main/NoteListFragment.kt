@@ -12,10 +12,7 @@ import com.example.cleannotes.event.LoadAllNotes
 import com.example.cleannotes.ui.OnNoteClick
 import com.example.cleannotes.ui.main.adapter.NoteListAdapter
 import com.example.domain.model.Note
-import com.example.domain.state.OnEmptyDataState
-import com.example.domain.state.OnErrorState
-import com.example.domain.state.OnLoadingState
-import com.example.domain.state.OnSuccessState
+import com.example.domain.state.*
 import kotlinx.android.synthetic.main.note_list_fragment.*
 
 class NoteListFragment : BaseFragment(R.layout.note_list_fragment), OnNoteClick {
@@ -35,7 +32,7 @@ class NoteListFragment : BaseFragment(R.layout.note_list_fragment), OnNoteClick 
             when (state) {
                 OnLoadingState -> onLoadingState()
                 OnEmptyDataState -> onEmptyState()
-                is OnSuccessState<*> -> onSuccessState(data = state.data as List<Note>)
+                is OnSuccessLoadListState -> onSuccessState(data = state.data)
                 is OnErrorState -> onErrorState(message = state.message)
             }
         })
@@ -48,23 +45,25 @@ class NoteListFragment : BaseFragment(R.layout.note_list_fragment), OnNoteClick 
     }
 
     private fun onSuccessState(data: List<Note>) {
-        noteList.visibility = View.VISIBLE
         noteListLoadingBar.visibility = View.GONE
+        emptyNoteListMessage.visibility = View.GONE
+        noteList.visibility = View.VISIBLE
         recyclerAdapter.updateNoteList(newNotes = data)
     }
 
     private fun onErrorState(message: String) {
-        displayMessage(message = message)
+        displayMessage(view = noteList, message = message)
     }
 
     private fun onEmptyState() {
-        noteList.visibility = View.VISIBLE
         noteListLoadingBar.visibility = View.GONE
-        displayMessage(message = "Empty list")
+        noteList.visibility = View.GONE
+        emptyNoteListMessage.visibility = View.VISIBLE
     }
 
     private fun onLoadingState() {
         noteList.visibility = View.GONE
+        emptyNoteListMessage.visibility = View.GONE
         noteListLoadingBar.visibility = View.VISIBLE
     }
 

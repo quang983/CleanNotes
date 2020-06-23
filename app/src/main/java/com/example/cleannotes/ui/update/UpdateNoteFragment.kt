@@ -31,14 +31,14 @@ class UpdateNoteFragment : BaseFragment(R.layout.update_note_fragment) {
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 OnSuccessActionState -> onSuccessAction()
-                is OnSuccessState<*> -> onSuccessState(data = state.data as Note)
+                is OnSuccessLoadNoteState -> onSuccessState(data = state.note)
                 is OnErrorState -> onErrorState(message = state.message)
             }
         })
     }
 
     private fun onErrorState(message: String) {
-        displayMessage(message = message)
+        displayMessage(view = updatedNoteTitle, message = message)
     }
 
     private fun onSuccessState(data: Note) {
@@ -55,7 +55,7 @@ class UpdateNoteFragment : BaseFragment(R.layout.update_note_fragment) {
             val note = Note(id = noteId, title = title, description = description)
             viewModel.obtainEvent(event = UpdateNote(note = note))
         } else {
-            displayMessage(message = "All fields must be fill!")
+            displayMessage(view = updatedNoteTitle, message = "All fields must be fill!")
         }
     }
 
@@ -65,9 +65,9 @@ class UpdateNoteFragment : BaseFragment(R.layout.update_note_fragment) {
     }
 
     private fun onSuccessAction() {
-        displayMessage(message = "Success")
+        displayMessage(view = updatedNoteTitle, message = "Success")
         Navigation.findNavController(btnUpdateNote).navigate(
-            UpdateNoteFragmentDirections.backToNoteScreen().setNoteId(noteId)
+            UpdateNoteFragmentDirections.toNoteList()
         )
     }
 }
