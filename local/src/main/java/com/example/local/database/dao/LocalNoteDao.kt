@@ -20,4 +20,7 @@ interface LocalNoteDao {
 
     @Delete
     suspend fun deleteLocalNote(note: LocalNote)
+
+    @Query("DELETE FROM LocalNote")
+    suspend fun clearAllNotes()
 }

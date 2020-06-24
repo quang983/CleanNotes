@@ -10,4 +10,5 @@ val useCaseModule = module {
     factory<CreateNoteUseCase>()
     factory<UpdateNoteUseCase>()
     factory<DeleteNoteUseCase>()
+    factory<ClearNotesUseCase>()
 }

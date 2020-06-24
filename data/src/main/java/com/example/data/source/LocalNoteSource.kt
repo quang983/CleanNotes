@@ -9,5 +9,6 @@ interface LocalNoteSource {
     suspend fun create(entity: NoteModel)
     suspend fun update(entity: NoteModel)
     suspend fun delete(entity: NoteModel)
+    suspend fun clear()
 
 }

@@ -36,4 +36,8 @@ class AppNoteRepository(
         val entity = mapper.toModel(entity = note)
         localDataSource.delete(entity = entity)
     }
+
+    override suspend fun clearNotes() {
+        localDataSource.clear()
+    }
 }

@@ -5,4 +5,5 @@
     <string name="note_menu_delete">Delete</string>
     <string name="note_menu_update">Update</string>
     <string name="empty_list_message">Oops. Nothing to show now :)</string>
+    <string name="clear_all_notes">Clear</string>
 </resources>

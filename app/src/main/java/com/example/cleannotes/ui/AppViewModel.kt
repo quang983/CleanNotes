@@ -15,7 +15,8 @@ class AppViewModel(
     private val deleteNoteUseCase: DeleteNoteUseCase,
     private val getAllNotesUseCase: GetAllNotesUseCase,
     private val getNoteByIdUseCase: GetNoteByIdUseCase,
-    private val updateNoteUseCase: UpdateNoteUseCase
+    private val updateNoteUseCase: UpdateNoteUseCase,
+    private val clearNotesUseCase: ClearNotesUseCase
 ): BaseViewModel() {
 
     override fun obtainEvent(event: Event) {
@@ -27,6 +28,21 @@ class AppViewModel(
             )
             is UpdateNote -> onUpdateNoteEvent(note = event.note)
             is DeleteNote -> onDeleteNoteEvent(note = event.note)
+            DeleteAllNotes -> onClearAllNotesEvent()
+        }
+    }
+
+    private fun onClearAllNotesEvent() {
+        viewModelScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    clearNotesUseCase.execute()
+                }
+                _state.value = OnSuccessActionState
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _state.value = OnErrorState(message = "")
+            }
         }
     }
 

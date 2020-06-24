@@ -1,6 +1,9 @@
 package com.example.cleannotes.ui.main
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -8,9 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.cleannotes.R
 import com.example.cleannotes.base.BaseFragment
+import com.example.cleannotes.event.DeleteAllNotes
 import com.example.cleannotes.event.LoadAllNotes
 import com.example.cleannotes.ui.OnNoteClick
 import com.example.cleannotes.ui.main.adapter.NoteListAdapter
+import com.example.cleannotes.util.buildDialog
 import com.example.domain.model.Note
 import com.example.domain.state.*
 import kotlinx.android.synthetic.main.note_list_fragment.*
@@ -21,10 +26,22 @@ class NoteListFragment : BaseFragment(R.layout.note_list_fragment), OnNoteClick 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        recyclerAdapter = NoteListAdapter(this@NoteListFragment)
+        setHasOptionsMenu(true)
         setupRecycler()
         setupButton()
         viewModel.obtainEvent(event = LoadAllNotes)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.note_list_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.delete_all_notes -> deleteAllNotes()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun observeState() {
@@ -32,10 +49,16 @@ class NoteListFragment : BaseFragment(R.layout.note_list_fragment), OnNoteClick 
             when (state) {
                 OnLoadingState -> onLoadingState()
                 OnEmptyDataState -> onEmptyState()
+                OnSuccessActionState -> onSuccessActionState()
                 is OnSuccessLoadListState -> onSuccessState(data = state.data)
                 is OnErrorState -> onErrorState(message = state.message)
             }
         })
+    }
+
+    private fun onSuccessActionState() {
+        displayMessage(noteList, "Success!")
+        viewModel.obtainEvent(event = LoadAllNotes)
     }
 
     override fun onClick(noteId: Long) {
@@ -76,10 +99,20 @@ class NoteListFragment : BaseFragment(R.layout.note_list_fragment), OnNoteClick 
     }
 
     private fun setupRecycler() {
+        recyclerAdapter = NoteListAdapter(this@NoteListFragment)
         noteList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = recyclerAdapter
         }
     }
 
+    private fun deleteAllNotes() {
+        val dialog = buildDialog(
+            requireContext(),
+            "Delete notes",
+            viewModel::obtainEvent,
+            DeleteAllNotes
+        )
+        dialog.show()
+    }
 }

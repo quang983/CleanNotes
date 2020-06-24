@@ -37,4 +37,8 @@ class LocalNoteSourceImpl(
         localDao.deleteLocalNote(note = local)
     }
 
+    override suspend fun clear() {
+        localDao.clearAllNotes()
+    }
+
 }
