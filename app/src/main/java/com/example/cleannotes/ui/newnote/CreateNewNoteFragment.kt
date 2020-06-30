@@ -6,15 +6,17 @@ import androidx.navigation.Navigation
 import com.example.cleannotes.R
 import com.example.cleannotes.base.BaseFragment
 import com.example.cleannotes.event.CreateNewNote
-import com.example.cleannotes.util.NoteValidator
+import com.example.cleannotes.util.Validator
 import com.example.domain.state.OnErrorState
 import com.example.domain.state.OnSuccessActionState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.create_new_note_fragment.*
-import org.koin.android.ext.android.inject
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class CreateNewNoteFragment : BaseFragment(R.layout.create_new_note_fragment) {
 
-    private val validator: NoteValidator by inject()
+    @Inject lateinit var validator: Validator
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

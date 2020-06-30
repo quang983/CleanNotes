@@ -1,8 +1,9 @@
 package com.example.domain.usecase
 
 import com.example.domain.repository.NoteRepository
+import javax.inject.Inject
 
-class GetNoteByIdUseCase(
+class GetNoteByIdUseCase @Inject constructor(
     private val repository: NoteRepository
 ) {
 

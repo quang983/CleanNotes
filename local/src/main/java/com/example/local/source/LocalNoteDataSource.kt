@@ -4,8 +4,9 @@ import com.example.data.entity.NoteModel
 import com.example.data.source.LocalNoteSource
 import com.example.local.database.dao.LocalNoteDao
 import com.example.local.mapper.LocalNoteMapper
+import javax.inject.Inject
 
-class LocalNoteSourceImpl(
+class LocalNoteDataSource @Inject constructor(
     private val localDao: LocalNoteDao,
     private val mapper: LocalNoteMapper
 ): LocalNoteSource {

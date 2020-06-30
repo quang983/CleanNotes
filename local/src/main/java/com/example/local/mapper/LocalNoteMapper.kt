@@ -2,8 +2,9 @@ package com.example.local.mapper
 
 import com.example.data.entity.NoteModel
 import com.example.local.entity.LocalNote
+import javax.inject.Inject
 
-class LocalNoteMapper: LocalMapper<NoteModel, LocalNote> {
+class LocalNoteMapper @Inject constructor(): LocalMapper<NoteModel, LocalNote> {
 
     override fun toModel(local: LocalNote): NoteModel {
         return NoteModel(

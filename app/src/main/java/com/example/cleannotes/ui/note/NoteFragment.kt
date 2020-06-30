@@ -13,8 +13,10 @@ import com.example.cleannotes.event.GetNoteById
 import com.example.cleannotes.util.buildDialog
 import com.example.domain.model.Note
 import com.example.domain.state.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.note_fragment.*
 
+@AndroidEntryPoint
 class NoteFragment : BaseFragment(R.layout.note_fragment) {
 
     private var note: Note? = null

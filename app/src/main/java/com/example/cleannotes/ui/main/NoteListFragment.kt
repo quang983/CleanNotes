@@ -18,8 +18,10 @@ import com.example.cleannotes.ui.main.adapter.NoteListAdapter
 import com.example.cleannotes.util.buildDialog
 import com.example.domain.model.Note
 import com.example.domain.state.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.note_list_fragment.*
 
+@AndroidEntryPoint
 class NoteListFragment : BaseFragment(R.layout.note_list_fragment), OnNoteClick {
 
     private lateinit var recyclerAdapter: NoteListAdapter

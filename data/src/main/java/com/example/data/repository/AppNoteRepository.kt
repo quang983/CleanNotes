@@ -4,8 +4,9 @@ import com.example.data.mapper.NoteMapper
 import com.example.data.source.LocalNoteSource
 import com.example.domain.model.Note
 import com.example.domain.repository.NoteRepository
+import javax.inject.Inject
 
-class AppNoteRepository(
+class AppNoteRepository @Inject constructor(
     private val localDataSource: LocalNoteSource,
     private val mapper: NoteMapper
 ): NoteRepository {

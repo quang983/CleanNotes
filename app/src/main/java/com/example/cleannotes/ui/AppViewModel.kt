@@ -1,5 +1,6 @@
 package com.example.cleannotes.ui
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.example.cleannotes.base.BaseViewModel
 import com.example.cleannotes.event.*
@@ -10,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AppViewModel(
+class AppViewModel @ViewModelInject constructor(
     private val createNoteUseCase: CreateNoteUseCase,
     private val deleteNoteUseCase: DeleteNoteUseCase,
     private val getAllNotesUseCase: GetAllNotesUseCase,

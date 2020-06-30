@@ -2,9 +2,10 @@ package com.example.data.mapper
 
 import com.example.data.entity.NoteModel
 import com.example.domain.model.Note
+import javax.inject.Inject
 
 
-class NoteMapper: BaseMapper<NoteModel, Note> {
+class NoteMapper @Inject constructor(): BaseMapper<NoteModel, Note> {
 
     override fun toModel(entity: Note): NoteModel {
         return NoteModel(

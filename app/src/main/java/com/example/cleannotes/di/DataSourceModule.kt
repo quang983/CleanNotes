@@ -1,7 +1,7 @@
 package com.example.cleannotes.di
 
-import com.example.cleannotes.util.NoteValidator
-import com.example.cleannotes.util.Validator
+import com.example.data.source.LocalNoteSource
+import com.example.local.source.LocalNoteDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -9,9 +9,9 @@ import dagger.hilt.android.components.ActivityComponent
 
 @InstallIn(ActivityComponent::class)
 @Module
-abstract class UtilModule {
+abstract class DataSourceModule {
 
     @Binds
-    abstract fun bindValidator(noteValidator: NoteValidator): Validator
+    abstract fun bindLocalNoteSource(dataSource: LocalNoteDataSource): LocalNoteSource
 
 }

@@ -9,15 +9,18 @@ import com.example.cleannotes.base.BaseFragment
 import com.example.cleannotes.event.GetNoteById
 import com.example.cleannotes.event.UpdateNote
 import com.example.cleannotes.util.NoteValidator
+import com.example.cleannotes.util.Validator
 import com.example.domain.model.Note
 import com.example.domain.state.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.update_note_fragment.*
-import org.koin.android.ext.android.inject
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class UpdateNoteFragment : BaseFragment(R.layout.update_note_fragment) {
 
     private var noteId: Long = 0
-    private val validator: NoteValidator by inject()
+    @Inject lateinit var validator: Validator
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

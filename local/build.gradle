@@ -24,6 +24,14 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
@@ -34,9 +42,9 @@ dependencies {
 
     implementation(project(":data"))
 
-    // Koin & experimental features
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-core-ext:$koin_version"
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     // Room
     def room_version = '2.2.5'
