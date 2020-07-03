@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,7 @@ import kotlinx.android.synthetic.main.note_list_fragment.*
 @AndroidEntryPoint
 class NoteListFragment : BaseFragment(R.layout.note_list_fragment), OnNoteClick {
 
+    private val viewModel: NoteListViewModel by viewModels()
     private lateinit var recyclerAdapter: NoteListAdapter
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -7,6 +7,6 @@ class ClearNotesUseCase @Inject constructor(
     private val repository: NoteRepository
 ) {
 
-    suspend fun execute() = repository.clearNotes()
+    suspend operator fun invoke() = repository.clearNotes()
 
 }

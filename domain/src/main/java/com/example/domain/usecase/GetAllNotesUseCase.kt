@@ -7,6 +7,6 @@ class GetAllNotesUseCase @Inject constructor(
     private val repository: NoteRepository
 ) {
 
-    suspend fun execute() = repository.getAllNotes()
+    suspend operator fun invoke() = repository.getAllNotes()
 
 }

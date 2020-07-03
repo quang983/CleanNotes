@@ -8,7 +8,7 @@ class CreateNoteUseCase @Inject constructor(
     private val repository: NoteRepository
 ) {
 
-    suspend fun execute(title: String, description: String) {
+    suspend operator fun invoke(title: String, description: String) {
         val note = Note(title = title, description = description)
         repository.createNewNote(note = note)
     }

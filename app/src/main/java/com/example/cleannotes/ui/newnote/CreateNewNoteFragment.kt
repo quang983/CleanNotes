@@ -1,6 +1,7 @@
 package com.example.cleannotes.ui.newnote
 
 import android.os.Bundle
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.cleannotes.R
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CreateNewNoteFragment : BaseFragment(R.layout.create_new_note_fragment) {
 
+    private val viewModel: NewNoteViewModel by viewModels()
     @Inject lateinit var validator: Validator
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

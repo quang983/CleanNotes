@@ -7,6 +7,6 @@ class GetNoteByIdUseCase @Inject constructor(
     private val repository: NoteRepository
 ) {
 
-    suspend fun execute(id: Long) = repository.getNoteById(id = id)
+    suspend operator fun invoke(id: Long) = repository.getNoteById(id = id)
 
 }

@@ -2,13 +2,14 @@ package com.example.cleannotes.ui.update
 
 import android.os.Bundle
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.cleannotes.R
 import com.example.cleannotes.base.BaseFragment
 import com.example.cleannotes.event.GetNoteById
 import com.example.cleannotes.event.UpdateNote
-import com.example.cleannotes.util.NoteValidator
+import com.example.cleannotes.ui.NoteViewModel
 import com.example.cleannotes.util.Validator
 import com.example.domain.model.Note
 import com.example.domain.state.*
@@ -21,6 +22,7 @@ class UpdateNoteFragment : BaseFragment(R.layout.update_note_fragment) {
 
     private var noteId: Long = 0
     @Inject lateinit var validator: Validator
+    private val viewModel: NoteViewModel by viewModels()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

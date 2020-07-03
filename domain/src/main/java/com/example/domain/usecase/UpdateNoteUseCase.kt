@@ -8,6 +8,6 @@ class UpdateNoteUseCase @Inject constructor(
     private val repository: NoteRepository
 ) {
 
-    suspend fun execute(note: Note) = repository.updateNote(note = note)
+    suspend operator fun invoke(note: Note) = repository.updateNote(note = note)
 
 }

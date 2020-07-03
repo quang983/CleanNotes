@@ -8,6 +8,6 @@ class DeleteNoteUseCase @Inject constructor(
     private val repository: NoteRepository
 ) {
 
-    suspend fun execute(note: Note) = repository.deleteNote(note = note)
+    suspend operator fun invoke(note: Note) = repository.deleteNote(note = note)
 
 }

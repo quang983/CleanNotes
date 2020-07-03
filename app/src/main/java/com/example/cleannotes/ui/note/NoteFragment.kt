@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.cleannotes.R
 import com.example.cleannotes.base.BaseFragment
 import com.example.cleannotes.event.DeleteNote
 import com.example.cleannotes.event.GetNoteById
+import com.example.cleannotes.ui.NoteViewModel
 import com.example.cleannotes.util.buildDialog
 import com.example.domain.model.Note
 import com.example.domain.state.*
@@ -19,6 +21,7 @@ import kotlinx.android.synthetic.main.note_fragment.*
 @AndroidEntryPoint
 class NoteFragment : BaseFragment(R.layout.note_fragment) {
 
+    private val viewModel: NoteViewModel by viewModels()
     private var note: Note? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
