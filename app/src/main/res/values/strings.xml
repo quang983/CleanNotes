@@ -6,4 +6,9 @@
     <string name="note_menu_update">Update</string>
     <string name="empty_list_message">Oops. Nothing to show now :)</string>
     <string name="clear_all_notes">Clear</string>
+    <string name="main_menu_notes">Notes</string>
+    <string name="main_menu_groups">Groups</string>
+    <string name="create_group">New group</string>
+    <string name="new_group_hint">Type a name for group</string>
+    <string name="note_groups">Groups</string>
 </resources>

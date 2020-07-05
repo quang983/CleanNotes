@@ -13,7 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="fill"
+        android:layout_marginBottom="55dp"
         app:defaultNavHost="true"
         app:navGraph="@navigation/app_navigation" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/appBottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:menu="@menu/main_menu"
+        android:background="@color/design_default_color_background"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

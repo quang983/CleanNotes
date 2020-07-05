@@ -1,6 +1,8 @@
 package com.example.cleannotes.di
 
+import com.example.data.repository.AppGroupRepository
 import com.example.data.repository.AppNoteRepository
+import com.example.domain.repository.GroupRepository
 import com.example.domain.repository.NoteRepository
 import dagger.Binds
 import dagger.Module
@@ -14,4 +16,6 @@ abstract class RepositoryModule {
     @Binds
     abstract fun bindNoteRepository(repository: AppNoteRepository): NoteRepository
 
+    @Binds
+    abstract fun bindGroupRepository(repository: AppGroupRepository): GroupRepository
 }

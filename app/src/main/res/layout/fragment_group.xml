@@ -1,0 +1,21 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.cleannotes.ui.groups.group.GroupFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/groupNotesList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="fill"/>
+
+    <TextView
+        android:id="@+id/groupEmptyMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/empty_list_message"
+        android:textSize="18sp"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class LocalNote(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
+    var groupId: Long = 0,
     val title: String,
     val description: String
 ) {

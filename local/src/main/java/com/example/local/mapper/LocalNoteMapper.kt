@@ -9,6 +9,7 @@ class LocalNoteMapper @Inject constructor(): LocalMapper<NoteModel, LocalNote> {
     override fun toModel(local: LocalNote): NoteModel {
         return NoteModel(
             id = local.id,
+            groupId = local.groupId,
             title = local.title,
             description = local.description
         )
@@ -17,6 +18,7 @@ class LocalNoteMapper @Inject constructor(): LocalMapper<NoteModel, LocalNote> {
     override fun toLocal(entity: NoteModel): LocalNote {
         return LocalNote(
             id = entity.id ?: 0,
+            groupId = entity.groupId ?: 0,
             title = entity.title,
             description = entity.description
         )

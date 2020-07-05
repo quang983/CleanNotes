@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/noteListFragment"
-        android:name="com.example.cleannotes.ui.main.NoteListFragment"
+        android:name="com.example.cleannotes.ui.notes.main.NoteListFragment"
         android:label="Notes"
         tools:layout="@layout/note_list_fragment" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/createNewNoteFragment"
-        android:name="com.example.cleannotes.ui.newnote.CreateNewNoteFragment"
+        android:name="com.example.cleannotes.ui.notes.newnote.CreateNewNoteFragment"
         android:label="New note"
         tools:layout="@layout/create_new_note_fragment" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/noteFragment"
-        android:name="com.example.cleannotes.ui.note.NoteFragment"
+        android:name="com.example.cleannotes.ui.notes.note.NoteFragment"
         android:label="Note"
         tools:layout="@layout/note_fragment" >
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateNoteFragment"
-        android:name="com.example.cleannotes.ui.update.UpdateNoteFragment"
+        android:name="com.example.cleannotes.ui.notes.update.UpdateNoteFragment"
         android:label="Update note"
         tools:layout="@layout/update_note_fragment" >
         <argument
@@ -54,5 +54,42 @@
         <action
             android:id="@+id/toNoteList"
             app:destination="@id/noteListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/groupListFragment"
+        android:name="com.example.cleannotes.ui.groups.main.GroupListFragment"
+        android:label="Groups"
+        tools:layout="@layout/fragment_group_list" >
+        <action
+            android:id="@+id/toGroup"
+            app:destination="@id/groupFragment" />
+        <action
+            android:id="@+id/toCreateGroup"
+            app:destination="@id/createGroupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/groupFragment"
+        android:name="com.example.cleannotes.ui.groups.group.GroupFragment"
+        android:label="Group"
+        tools:layout="@layout/fragment_group" >
+        <argument
+            android:name="groupId"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <action
+            android:id="@+id/toGroupList"
+            app:destination="@id/groupListFragment" />
+        <action
+            android:id="@+id/toNote"
+            app:destination="@id/noteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createGroupFragment"
+        android:name="com.example.cleannotes.ui.groups.create.CreateGroupFragment"
+        android:label="Create group"
+        tools:layout="@layout/fragment_create_group" >
+        <action
+            android:id="@+id/toGroupList"
+            app:destination="@id/groupListFragment" />
     </fragment>
 </navigation>
