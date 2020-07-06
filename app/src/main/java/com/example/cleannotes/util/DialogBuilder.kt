@@ -1,8 +1,9 @@
 package com.example.cleannotes.util
 
-import android.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.content.Context
 import com.example.cleannotes.event.Event
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 fun buildDialog(
     context: Context,
@@ -10,7 +11,7 @@ fun buildDialog(
     action: (event: Event) -> Unit,
     event: Event
 ): AlertDialog {
-    return AlertDialog.Builder(context)
+    return MaterialAlertDialogBuilder(context)
         .setTitle(title)
         .setMessage("Are you sure?")
         .setPositiveButton("Yes") { _, _ ->

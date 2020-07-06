@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cleannotes.R
 import com.example.cleannotes.ui.interfaces.OnItemClicked
 import com.example.domain.model.Note
-import kotlinx.android.synthetic.main.note_card.view.*
+import kotlinx.android.synthetic.main.item_card.view.*
 
 class NoteListAdapter(
     private val onItemClickedListener: OnItemClicked
@@ -17,7 +17,7 @@ class NoteListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.note_card, parent, false
+            R.layout.item_card, parent, false
         )
         return NoteViewHolder(view = view)
     }
@@ -40,7 +40,7 @@ class NoteListAdapter(
 class NoteViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
 
     fun bind(note: Note, listener: OnItemClicked) {
-        view.noteCardTitle.text = note.title
+        view.itemCardTitle.text = note.title
         view.setOnClickListener {
             listener.onClick(id = note.id!!)
         }

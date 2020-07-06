@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cleannotes.R
 import com.example.cleannotes.ui.interfaces.OnItemClicked
 import com.example.domain.model.Group
-import kotlinx.android.synthetic.main.group_card.view.*
+import kotlinx.android.synthetic.main.item_card.view.*
 
 class GroupListAdapter(
     private val listener: OnItemClicked
@@ -17,7 +17,7 @@ class GroupListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.group_card, parent, false
+            R.layout.item_card, parent, false
         )
         return GroupsViewHolder(view = view)
     }
@@ -41,7 +41,7 @@ class GroupListAdapter(
 class GroupsViewHolder(val view: View): RecyclerView.ViewHolder(view) {
 
     fun bind(group: Group, listener: OnItemClicked) {
-        view.groupCardTitle.text = group.name
+        view.itemCardTitle.text = group.name
         view.setOnClickListener {
             listener.onClick(id = group.id!!)
         }
